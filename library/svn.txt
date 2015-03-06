@@ -1,0 +1,19 @@
+- HWRev 1.3 related modifications:
+  - at the init of the ports verify whether the LSM330 (accelerometer + gyroscope) device is present, if it is present then we are working with e-puck 1.1 otherwise with e-puck 1.0
+  - implemented functions to read data from the LSM330 (accelerometer, gyroscope, temperature) and related utility functions
+  - modified the basilar accelerometer functions to return the correct value (I2C or ADC) based on current e-puck version
+  - extended the library to support the PO8030 I2C camera used in the e-puck 1.1
+  - added a function to returns the sampled battery value (same channel as where the accelerometer z axis was in e-puck 1.0); both raw and percentage values available
+
+- gumstix extension related modifications:
+  - modified the sampling configuration in order to sample two more channels for the additional proximity sensors (this is done only when selector=10)
+  - modified the uart2 init function to accept a parameter definining the baud rate (230400 used with the gumstix)
+
+- various modifications:
+  - added the "BATT_LOW" pin definition that let the user poll the battery state (1=>battery ok, 0=>battery < 3.4V)
+  - added "e_i2c_deinit" function to turn off I2C peripheral and disable related interrupt
+
+- grouped utility functions in "utility.c":
+  - getselector and wait functions
+  - get battery value functions
+  - timing function to get the elapsed time based on adc isr
