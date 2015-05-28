@@ -30,5 +30,5 @@
 *.out
 *.app
 *.hex
-*.elf
-*.map
+*elf
+*map
